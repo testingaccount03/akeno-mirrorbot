@@ -29,15 +29,15 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>Bot Uptime:</b> {currentTime}\n' \
-            f'<b>Total disk space:</b> {total}\n' \
-            f'<b>Used:</b> {used}  ' \
-            f'<b>Free:</b> {free}\n\n' \
-            f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \
-            f'<b>Down:</b> {recv}\n\n' \
-            f'<b>CPU:</b> {cpuUsage}%\n' \
-            f'<b>RAM:</b> {memory}%\n' \
-            f'<b>Disk:</b> {disk}%'
+    stats = f'<b>⏰ Bot Uptime:</b> {currentTime}\n' \
+            f'<b>🗄️ Total disk space:</b> {total}\n' \
+            f'<b>📀 Used:</b> {used}  ' \
+            f'<b>💿 Free:</b> {free}\n\n' \
+            f'📊Data Usage📊\n<b>🔺 Upload:</b> {sent}\n' \
+            f'<b>🔻 Down:</b> {recv}\n\n' \
+            f'<b>🖥️ CPU:</b> {cpuUsage}%\n' \
+            f'<b>⛏️ RAM:</b> {memory}%\n' \
+            f'<b>💾 Disk:</b> {disk}%'
     sendMessage(stats, context.bot, update)
 
 
@@ -47,14 +47,14 @@ def start(update, context):
 Hi {update.message.chat.first_name}, This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_photo("https://telegra.ph/file/5a63f0002646a731203bf.png", start_string, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async
 def repo(update, context):
     bot.send_message(update.message.chat_id,
     reply_to_message_id=update.message.message_id,
-    text="Repo: https://github.com/breakdowns/slam-mirrorbot", disable_web_page_preview=True)
+    text="Repo: https://github.com/Satriouz/akeno-mirrorbot", disable_web_page_preview=True)
 
 
 @run_async
