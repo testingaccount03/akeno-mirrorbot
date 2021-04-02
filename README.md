@@ -1,6 +1,6 @@
-[![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
+[![Akeno](https://telegra.ph/file/5a63f0002646a731203bf.png)](https://t.me/ParrotOmoshiroi)
 
-# Slam Mirror Bot
+# Akeno Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
 ## Features supported:
@@ -46,7 +46,7 @@ Deploying is pretty much straight forward and is divided into several steps as f
 
 - Clone this repo:
 ```
-git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
+git clone https://github.com/Satriouz/akeno-mirrorbot mirrorbot/
 cd mirrorbot
 ```
 
@@ -142,7 +142,7 @@ sudo docker run mirrorbot
 
 Give Star & Fork this repo, then upload **token.pickle** to your forks
 
-<p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/Satriouz/akeno-mirrorbot"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 ## Bot commands to be set in [@BotFather](https://t.me/BotFather)
 
