@@ -329,9 +329,9 @@ class GoogleDriveHelper:
                     url = requests.utils.requote_uri(f'{INDEX_URL}/{meta.get("name")}/')
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, url)).text
-                        buttons.buildbutton("⚡Index Link⚡", siurl)
+                        buttons.buildbutton("🗂️Index Link🗂️", siurl)
                     else:
-                        buttons.buildbutton("⚡Index Link⚡", url)
+                        buttons.buildbutton("🗂️Index Link🗂️", url)
                 if BUTTON_THREE_NAME is not None and BUTTON_THREE_URL is not None:
                     buttons.buildbutton(f"{BUTTON_THREE_NAME}", f"{BUTTON_THREE_URL}")
                 if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
@@ -356,9 +356,9 @@ class GoogleDriveHelper:
                     url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}')
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, url)).text
-                        buttons.buildbutton("⚡Index Link⚡", siurl)
-                    else:
-                        buttons.buildbutton("⚡Index Link⚡", url)
+                        buttons.buildbutton("🗂️Index Link🗂️", siurl)
+                    else:🗂️
+                        buttons.buildbutton("🗂️Index Link🗂️", url)
                 if BUTTON_THREE_NAME is not None and BUTTON_THREE_URL is not None:
                     buttons.buildbutton(f"{BUTTON_THREE_NAME}", f"{BUTTON_THREE_URL}")
                 if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
@@ -478,9 +478,9 @@ class GoogleDriveHelper:
                     content += f'<b> | <a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
                     nxt_page += 1
             Telegraph(access_token=TELEGRAPH_TOKEN).edit_page(path = self.path[prev_page],
-                                 title = 'Slam Mirror Bot Search',
-                                 author_name='Slam Mirror Bot',
-                                 author_url='https://github.com/breakdowns/slam-mirrorbot',
+                                 title = 'Akeno Mirror Bot Search',
+                                 author_name='Akeno Mirror Bot',
+                                 author_url='https://github.com/Satriouz/akeno-mirrorbot',
                                  html_content=content)
         return
 
@@ -556,9 +556,9 @@ class GoogleDriveHelper:
                     return "No Result Found ❌", None
                 for content in self.telegraph_content:
                     self.path.append(Telegraph(access_token=TELEGRAPH_TOKEN).create_page(
-                        title='Slam Mirror Bot Search',
-                        author_name='Slam Mirror Bot',
-                        author_url='https://github.com/breakdowns/slam-mirrorbot',
+                        title='Akeno Mirror Bot Search',
+                        author_name='Akeno Mirror Bot',
+                        author_url='https://github.com/Satriouz/akeno-mirrorbot',
                         html_content=content
                     )['path'])
                 self.num_of_path = len(self.path)
@@ -566,7 +566,7 @@ class GoogleDriveHelper:
                     self.edit_telegraph()
                 msg = f"<b>🔎 Search Results For <i>{fileName}</i></b> \n<b>📚 Found {len(response['files'])} results</b>"
                 buttons = button_build.ButtonMaker()
-                buttons.buildbutton("HERE", f"https://telegra.ph/{self.path[0]}")
+                buttons.buildbutton("🔎 HERE 🔍", f"https://telegra.ph/{self.path[0]}")
                 return msg, InlineKeyboardMarkup(buttons.build_menu(1))
             else:
                 return '', ''
