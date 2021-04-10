@@ -13,7 +13,7 @@ def list_drive(update, context):
     else:
         search = update.message.text.split(' ', maxsplit=1)[1]
         LOGGER.info(f"Searching: '{search}'...")
-        reply = sendMessage('Searching..... Please Wait!', context.bot, update)
+        reply = sendMessage('🔍 Searching..... ✋ Please Wait!', context.bot, update)
         gdrive = GoogleDriveHelper(None)
         msg, button = gdrive.drive_list(search)
         if msg:
@@ -22,7 +22,7 @@ def list_drive(update, context):
             else:
                 editMessage(msg, reply)
         else:
-            editMessage('No results found', reply)
+            editMessage('🚫 No results found', reply)
         # if not USE_TELEGRAPH:
         #     threading.Thread(target=auto_delete_message, args=(context.bot, update.message, reply)).start()
 
