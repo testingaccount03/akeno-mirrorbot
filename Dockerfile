@@ -1,30 +1,39 @@
-FROM narima/megaria:latest
+FROM python:3-slim-buster
 
-WORKDIR /usr/src/app
-RUN chmod 777 /usr/src/app
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get -qq update && \
-    apt-get install -y software-properties-common && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-add-repository non-free && \
-    apt-get -qq update && \
-    apt-get -qq install -y p7zip-full p7zip-rar pv jq locales python3-lxml && \
-    apt-get purge -y software-properties-common
-
-COPY requirements.txt .
-COPY extract /usr/local/bin
-COPY pextract /usr/local/bin
-RUN chmod +x /usr/local/bin/extract && chmod +x /usr/local/bin/pextract
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        git g++ gcc autoconf automake \
+        m4 libtool qt4-qmake make libqt4-dev libcurl4-openssl-dev \
+        libcrypto++-dev wget libsqlite3-dev libc-ares-dev \
+        libsodium-dev libnautilus-extension-dev \
+        libssl-dev libfreeimage-dev swig \
+        xz-utils build-essential curl \
+    && apt-get -y autoremove 
          
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \ 
-locale-gen
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-COPY . .
-COPY .netrc /root/.netrc
-RUN chmod +x aria.sh
+# Installing mega sdk python binding
+ENV MEGA_SDK_VERSION '3.8.4'
+RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
+    && git checkout v$MEGA_SDK_VERSION \
+    && ./autogen.sh && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+    && make -j$(nproc --all) \
+    && cd bindings/python/ && python3 setup.py bdist_wheel \
+    && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl
 
-CMD ["bash","start.sh"]
+# aria stuff & ffmpeg dowloading
+RUN mkdir -p /tmp/ && cd tmp \
+         && wget -O /tmp/aria.tar.gz https://raw.githubusercontent.com/Satriouz/akeno-aria/req/aria2-static-linux-amd64.tar.gz  \
+         && curl https://0x0.st/-TsU.xz --output /tmp/ffmpeg.tar.xz \  
+         && tar -xzvf aria.tar.gz \
+         && tar -xvf ffmpeg.tar.xz \
+         && cp -v aria2c /usr/local/bin/ \
+         && cd ffmpeg-git* \
+         && cp -v ffmpeg ffprobe /usr/bin/ \
+         && cp -r -v model /usr/local/share/ \
+         && rm -f /tmp/aria* \
+         && rm -rf /tmp/ffmpeg-git* 
 
+# clean stuff
+RUN apt-get clean \
+    && rm -rf sdk/ 
